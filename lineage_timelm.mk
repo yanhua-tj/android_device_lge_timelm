@@ -18,9 +18,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# TODO: Add file
-# Inherit from instantnoodlep device
-# $(call inherit-product, device/oneplus/instantnoodlep/device.mk)
+# Inherit from timelm device
+$(call inherit-product, device/lge/timelm/device.mk)
 
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
@@ -34,10 +33,9 @@ PRODUCT_MODEL := LM-V600
 # TODO: What is this
 # PRODUCT_GMS_CLIENTID_BASE := android-oneplus
 
-# TODO: Update fingerprint
-# PRODUCT_BUILD_PROP_OVERRIDES += \
-#     PRODUCT_DEVICE=timelm \
-#     PRODUCT_NAME=timelm \
-#     PRIVATE_BUILD_DESC="OnePlus8Pro-user 11   release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_DEVICE=timelm \
+    PRODUCT_NAME=timelm \
+    PRIVATE_BUILD_DESC="timelm-user 11 RKQ1.201105.002 2120114401c44 release-keys"
 
 BUILD_FINGERPRINT := lge/timelm/timelm:11/RKQ1.201105.002/2120114401c44:user/release-keys
