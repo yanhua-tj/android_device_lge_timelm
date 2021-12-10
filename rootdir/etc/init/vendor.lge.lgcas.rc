@@ -1,0 +1,64 @@
+# Copyright (c) 2017, LG Eletronics. All rights reserved.
+# Create energy-aware scheduler tuning nodes for LGCAS
+on init
+
+# only for cpuset-control while running multi-gaming
+   chown system system /dev/cpuset/foreground
+   chown system system /dev/cpuset/foreground/cpus
+   chown system system /dev/cpuset/foreground/cgroup.procs
+   chmod 0664 /dev/cpuset/foreground/cgroup.procs
+
+   chown system system /dev/cpuset/background
+   chown system system /dev/cpuset/background/cpus
+   chown system system /dev/cpuset/background/cgroup.procs
+   chmod 0664 /dev/cpuset/background/cgroup.procs
+
+   mkdir /dev/cpuset/top-sub
+   chown system system /dev/cpuset/top-sub
+   chown system system /dev/cpuset/top-sub/cpus
+   chmod 0664 /dev/cpuset/top-sub/cpus
+   chown system system /dev/cpuset/top-sub/cgroup.procs
+   chmod 0664 /dev/cpuset/top-sub/cgroup.procs
+
+   write /dev/cpuset/top-sub/cpus 0-6
+   write /dev/cpuset/top-sub/mems 0
+
+   mkdir /dev/cpuset/top-save
+   chown system system /dev/cpuset/top-save
+   chown system system /dev/cpuset/top-save/cpus
+   chmod 0664 /dev/cpuset/top-save/cpus
+   chown system system /dev/cpuset/top-save/cgroup.procs
+   chmod 0664 /dev/cpuset/top-save/cgroup.procs
+
+   write /dev/cpuset/top-save/cpus 0-3
+   write /dev/cpuset/top-save/mems 0
+
+# for cgroup0-utilclamp control while running multi-app
+   mkdir /dev/cpuctl/top-sub
+   mkdir /dev/cpuctl/top-save
+
+   chown system system /dev/cpuctl/top-sub
+   chown system system /dev/cpuctl/top-save
+
+   chmod 0664 /dev/cpuctl/top-sub/cgroup.procs
+   chmod 0664 /dev/cpuctl/top-sub/cpu.uclamp.max
+   chmod 0664 /dev/cpuctl/top-sub/cpu.uclamp.min
+
+   chmod 0664 /dev/cpuctl/top-save/cgroup.procs
+   chmod 0664 /dev/cpuctl/top-save/cpu.uclamp.max
+   chmod 0664 /dev/cpuctl/top-save/cpu.uclamp.min
+
+   chmod 0664 /dev/cpuctl/foreground/cgroup.procs
+
+   chown system system /dev/cpuctl/top-sub/cgroup.procs
+   chown system system /dev/cpuctl/top-sub/cpu.uclamp.max
+   chown system system /dev/cpuctl/top-sub/cpu.uclamp.min
+
+   chown system system /dev/cpuctl/top-save/cgroup.procs
+   chown system system /dev/cpuctl/top-save/cpu.uclamp.max
+   chown system system /dev/cpuctl/top-save/cpu.uclamp.min
+   chown system system /dev/cpuctl/foreground/cgroup.procs
+
+   write /dev/cpuctl/top-sub/cpu.uclamp.max 55
+   write /dev/cpuctl/top-save/cpu.uclamp.max 40
+

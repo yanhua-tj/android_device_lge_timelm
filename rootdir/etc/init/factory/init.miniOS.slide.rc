@@ -1,0 +1,10 @@
+#################################################################
+# SLIDE executable process
+
+service slide_mainlist /bin/python /data/msp/minios/run.py apps.slide.mainlist.slide_mainlist
+    class late_start
+    user root
+    group root
+    oneshot
+    disabled
+    seclabel u:r:minios_services:s0
